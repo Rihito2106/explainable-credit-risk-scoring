@@ -12,6 +12,13 @@ Users can input an applicant's financial profile and instantly receive:
 
 ---
 
+## 🔗 Live Demo
+👉 https://explainable-credit-risk-scoring-shap.streamlit.app/
+
+
+---
+
+
 ## Tech Stack
 * **Machine Learning:** XGBoost Classifier
 * **Explainable AI:** SHAP (SHapley Additive exPlanations)
