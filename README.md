@@ -34,7 +34,7 @@ Users can input an applicant's financial profile and instantly receive:
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/Rihito2106/explainable-credit-risk-scoring.git](https://github.com/Rihito2106/explainable-credit-risk-scoring.git)
+git clone https://github.com/Rihito2106/explainable-credit-risk-scoring.git
 cd explainable-credit-risk-scoring
 ```
 
@@ -54,5 +54,5 @@ streamlit run app.py
 ---
 
 ## Technical Challenges Overcome
-* **Dependency Hell:** Diagnosed and resolved a complex compatibility bug between XGBoost's JSON tree metadata and SHAP's TreeExplainer by isolating the project in a strict Conda environment using stable LTS versions (`xgboost==2.0.3`, `shap==0.45.1`).
+* **Dependencies:** Diagnosed and resolved a complex compatibility bug between XGBoost's JSON tree metadata and SHAP's TreeExplainer by isolating the project in a strict Conda environment using stable LTS versions (`xgboost==2.0.3`, `shap==0.45.1`).
 * **Model Persistence:** Engineered a clean artifact-loading pipeline to ensure the Streamlit frontend can seamlessly deserialize the trained model and multiple categorical encoders without state-loss.
