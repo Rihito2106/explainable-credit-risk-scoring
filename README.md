@@ -52,8 +52,8 @@ This ensures predictions remain logically consistent and aligned with real-world
 
 **Input Profile:**
 * **Checking Account:** Little 
-* [cite_start]**Credit Amount:** $2,500 
-* [cite_start]**Duration:** 24 months
+* **Credit Amount:** $2,500 
+* **Duration:** 24 months
 
 **Model Output:**
 * **Approval Probability:** 41.8% 
