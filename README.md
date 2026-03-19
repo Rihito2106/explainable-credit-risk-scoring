@@ -1,81 +1,62 @@
-Explainable Credit Risk Scoring Dashboard
-roject Overview
+# Explainable Credit Risk Scoring Dashboard
 
-In the modern financial ecosystem, deploying opaque “black-box” AI models is no longer sufficient. Regulatory bodies and stakeholders require transparency in every decision.
+## Project Overview
+In the modern financial ecosystem, deploying opaque "black-box" AI models is no longer sufficient. Regulatory bodies and stakeholders require transparency in every decision. 
 
-This project is an end-to-end, interactive machine learning web application that predicts credit risk while providing clear, human-understandable explanations using Explainable AI (XAI).
+This project is an end-to-end, interactive machine learning web application that predicts credit risk while providing clear, human-understandable explanations using **Explainable AI (XAI)**.
 
-Users can input an applicant’s financial profile and instantly receive:
+Users can input an applicant's financial profile and instantly receive:
+* **A Probability Score** indicating credit risk (Approved vs. Declined).
+* **A SHAP Waterfall Plot** showing exactly how each feature influenced the prediction.
+* **A Downloadable PDF Audit Report** summarizing the decision for stakeholders.
 
-A probability score indicating credit risk (Approved vs. Declined)
+---
 
-A SHAP waterfall plot showing how each feature influenced the prediction
+## Tech Stack
+* **Machine Learning:** XGBoost Classifier (`xgboost`)
+* **Explainable AI:** SHAP (SHapley Additive exPlanations)
+* **Frontend UI:** Streamlit
+* **Data Processing:** Pandas, NumPy
+* **Automated Reporting:** FPDF
+* **Model Persistence:** Joblib
 
-A downloadable PDF audit report summarizing the decision
+---
 
-Tech Stack
+## Key Features
+1. **Interactive UI:** Real-time adjustments using Streamlit sliders and dropdowns.
+2. **Instant Inference:** Dynamic encoding via pre-trained `scikit-learn` LabelEncoders.
+3. **Transparency:** Local SHAP explanations breaking down the exact push-and-pull of features (e.g., "Checking Account Status").
+4. **Exportable Reports:** One-click generation of a professional PDF detailing the risk factors.
 
-Machine Learning: XGBoost Classifier (xgboost)
+---
 
-Explainable AI: SHAP (SHapley Additive exPlanations)
+## How to Run Locally
 
-Frontend: Streamlit
-
-Data Processing: Pandas, NumPy
-
-Reporting: FPDF
-
-Model Persistence: Joblib
-
-Key Features
-
-Interactive UI with real-time inputs using Streamlit sliders and dropdowns
-
-Instant inference with dynamic encoding via pre-trained LabelEncoders
-
-Transparent predictions using SHAP for feature-level explanations
-
-One-click PDF generation for audit-ready reports
-
-How to Run Locally
-1. Clone the Repository
-git clone https://github.com/YOUR_USERNAME/explainable-credit-risk-scoring.git
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Rihito2106/explainable-credit-risk-scoring.git
 cd explainable-credit-risk-scoring
-2. Environment Setup (Important)
+```
 
-Due to compatibility issues between newer versions of XGBoost and SHAP, this project relies on specific library versions to avoid runtime errors.
-
-It is strongly recommended to use a dedicated Conda environment with Python 3.10:
-
+### 2. Environment Setup (Important!)
+To avoid metadata compatibility issues between newer versions of XGBoost and SHAP, this project relies on a specific Conda environment:
+```bash
 conda create -n credit_env python=3.10 -y
 conda activate credit_env
 pip install -r requirements.txt
+```
 
-Key dependencies:
-
-xgboost==2.0.3
-
-shap==0.45.1
-
-numpy==1.26.4
-
-Launch the Application
+### 3. Launch the App
+```bash
 streamlit run app.py
-📁 Project Structure
-├── app.py                   # Main Streamlit dashboard script
-├── requirements.txt         # Locked dependency versions
-├── README.md                # Project documentation
-└── models/                  # Serialized artifacts
-    ├── xgb_constrained_model.json
-    ├── Sex_encoder.pkl
-    ├── Housing_encoder.pkl
-    ├── Checking_account_encoder.pkl
-    └── Saving_accounts_encoder.pkl
-Technical Challenges Overcome
-1. Dependency Compatibility
+```
 
-Resolved version conflicts between XGBoost and SHAP that caused metadata-related errors. This was handled by isolating the environment and locking stable versions.
+---
 
-2. Model Persistence
+## Technical Challenges Overcome
+* **Dependencies:** Diagnosed and resolved a complex compatibility bug between XGBoost's JSON tree metadata and SHAP's TreeExplainer by isolating the project in a strict Conda environment using stable LTS versions (`xgboost==2.0.3`, `shap==0.45.1`).
+* **Model Persistence:** Engineered a clean artifact-loading pipeline to ensure the Streamlit frontend can seamlessly deserialize the trained model and multiple categorical encoders without state-loss.
 
-Designed a robust pipeline for loading serialized models and encoders, ensuring seamless integration with the Streamlit frontend without state inconsistencies.
+### 🖥️ Dashboard Preview
+![Dashboard - Prediction and SHAP Plot](images/dashboard_top.png)
+![Dashboard - Key Insights and Reporting](images/dashboard_bottom.png)
