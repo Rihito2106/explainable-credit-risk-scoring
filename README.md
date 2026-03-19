@@ -1,9 +1,9 @@
 # Explainable Credit Risk Scoring Dashboard
 
 ## Project Overview
-In the modern financial ecosystem, deploying opaque "black-box" AI models is no longer sufficient. Regulatory bodies and stakeholders require transparency in every decision. 
+In modern finance, black-box models are not enough. Decisions must be transparent, explainable, and auditable.
 
-This project is an end-to-end, interactive machine learning web application that predicts credit risk while providing clear, human-understandable explanations using **Explainable AI (XAI)**.
+This project is an end-to-end credit risk scoring system that combines XGBoost with SHAP to deliver accurate predictions along with understandable explanations using Explainable AI (XAI).
 
 Users can input an applicant's financial profile and instantly receive:
 * **A Probability Score** indicating credit risk (Approved vs. Declined).
@@ -27,6 +27,41 @@ Users can input an applicant's financial profile and instantly receive:
 2. **Instant Inference:** Dynamic encoding via pre-trained `scikit-learn` LabelEncoders.
 3. **Transparency:** Local SHAP explanations breaking down the exact push-and-pull of features (e.g., "Checking Account Status").
 4. **Exportable Reports:** One-click generation of a professional PDF detailing the risk factors.
+
+---
+
+## System Architecture
+
+`User Input` ➔ `Feature Encoding` ➔ `XGBoost Model` ➔ `Risk Prediction` ➔ `SHAP Explanation` ➔ `PDF Report Generation`
+
+---
+
+## Model Constraints
+
+The XGBoost model incorporates monotonic constraints to enforce domain knowledge:
+- **Account Balances:** Higher checking and savings balances strictly decrease default risk.
+- **Loan Amount:** Higher requested credit amounts strictly increase default risk.
+- **Loan Term:** Longer repayment durations strictly increase default risk.
+
+This ensures predictions remain logically consistent and aligned with real-world financial principles, preventing the model from learning illogical patterns from noisy data.
+
+---
+
+
+## Example Prediction
+
+**Input Profile:**
+* **Checking Account:** Little 
+* [cite_start]**Credit Amount:** $2,500 
+* [cite_start]**Duration:** 24 months
+
+**Model Output:**
+* **Approval Probability:** 41.8% 
+* **Decision:** ❌ DECLINED
+
+**Explainable AI (SHAP) Breakdown:**
+* 📉 **Primary Risk Factor:** *Checking account status* negatively impacted the score by -0.29.
+* 📈 **Primary Strength:** *Credit amount* added +0.08 to the approval score, but it was not enough to overcome the primary risk factor.
 
 ---
 
@@ -60,3 +95,14 @@ streamlit run app.py
 ### 🖥️ Dashboard Preview
 ![Dashboard - Prediction and SHAP Plot](images/dashboard_top.png)
 ![Dashboard - Key Insights and Reporting](images/dashboard_bottom.png)
+
+
+---
+
+## 🚥 Project Status
+✅ **Completed:** Local deployment, full XAI integration, and automated reporting.
+
+**Future Improvements:**
+* **Cloud Deployment:** Host the application on Streamlit Community Cloud or AWS/GCP.
+* **API Integration:** Build a FastAPI endpoint to serve the XGBoost model to external applications.
+* **Batch Processing:** Add functionality to upload a CSV of multiple applicants and generate a bulk risk report.
